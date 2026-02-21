@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock | Ramadan Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="6137.jpg" type="image/jpg">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .clock-hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav
+        style="position: sticky; top: 0; background: var(--card-bg); backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
+        <div class="container"
+            style="padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="text-decoration: none; color: var(--accent-gold); font-weight: 600;">← Back to
+                Home</a>
+            <button class="theme-toggle" id="theme-btn" title="Toggle Theme">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="clock-hero">
+        <section class="card"
+            style="width: 100%; max-width: 1000px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;">
+            <div class="analog-clock-container">
+                <div class="analog-clock">
+                    <div class="hand hour" id="hour-hand"></div>
+                    <div class="hand minute" id="minute-hand"></div>
+                    <div class="hand second" id="second-hand"></div>
+                    <div class="center-dot"></div>
+                </div>
+            </div>
+            <div class="digital-time-container" style="text-align: center;">
+                <div id="digital-clock"
+                    style="font-size: 6rem; font-weight: 200; color: var(--accent-gold); letter-spacing: -3px; line-height: 1;">
+                    00:00:00</div>
+                <div id="region-display"
+                    style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0.5rem 0 0.2rem;">
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">Region: </span>
+                    <span id="current-region-label" style="font-weight: 600; color: var(--accent-gold);">Global</span>
+                    <button id="change-region-btn"
+                        style="background: none; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; cursor: pointer; transition: var(--transition-smooth);">Change</button>
+                </div>
+                <div id="real-date" style="font-size: 1.8rem; margin: 0.5rem 0 3rem; color: var(--text-muted);">
+                    Saturday, February 21, 2026</div>
+
+                <div class="alarm-controls"
+                    style="background: var(--bg-color); padding: 2.5rem; border-radius: 32px; border: 1px solid var(--border-color); box-shadow: var(--shadow-soft);">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--accent-gold);">Azan Alerts</h3>
+                    <p style="font-size: 1rem; margin-bottom: 2rem; color: var(--text-muted);">Get notified for Suhoor &
+                        Iftar</p>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+                        <button id="enable-notifications" class="onboarding-btn"
+                            style="margin-top: 0; padding: 1.2rem 2.5rem; width: 100%; font-weight: 600;">Activate
+                            Notifications</button>
+                        <div class="alarm-status" id="alarm-status" style="font-size: 0.95rem;">Status: Offline</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem;">
+        <p>Ramadan Companion | Precise Timekeeping for the Holy Month</p>
+    </footer>
+
+    <!-- Onboarding Overlay (for changing region) -->
+    <div id="onboarding-overlay" class="onboarding-overlay" style="display: none;">
+        <div class="onboarding-card">
+            <div id="step-1" class="onboarding-step" style="display: none;">
+                <input type="text" id="user-name-input" value="User"> <!-- Placeholder for script compatibility -->
+            </div>
+            <div id="step-2" class="onboarding-step active">
+                <h2 style="color: var(--accent-gold);">Change Your Region</h2>
+                <p>Select a new city to update your times.</p>
+                <div class="onboarding-form">
+                    <div style="position: relative;">
+                        <input type="text" id="city-search" placeholder="Search City (e.g. London, Dubai...)"
+                            autocomplete="off">
+                        <div id="city-results" class="search-results-dropdown"></div>
+                    </div>
+                </div>
+                <button class="onboarding-btn" id="finish-onboarding" style="display: none;">Update Region</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
