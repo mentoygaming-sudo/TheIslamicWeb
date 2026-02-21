@@ -366,9 +366,29 @@ function initQibla() {
     if (needle) setTimeout(() => needle.style.transform = 'translate(-50%, -100%) rotate(45deg)', 1000);
 }
 
+function initNav() {
+    const toggle = document.getElementById('menu-toggle');
+    const links = document.getElementById('nav-links');
+    if (toggle && links) {
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+            links.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        links.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggle.classList.remove('active');
+                links.classList.remove('active');
+            });
+        });
+    }
+}
+
 // 11. Start App
 document.addEventListener('DOMContentLoaded', () => {
     initTheme(); initOnboarding(); initNotifications(); initTracker(); initTasbeeh(); initZakat(); initQibla(); initRegionChange();
+    initNav();
     generateCalendar();
     setInterval(updateTime, 1000); updateTime();
 

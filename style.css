@@ -50,10 +50,103 @@ h3 {
 nav a {
     transition: var(--transition-smooth);
     position: relative;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 nav a:hover {
     color: var(--accent-gold) !important;
+}
+
+.main-nav {
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background: var(--text-main);
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        transition: var(--transition-smooth);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
 }
 
 nav a::after {
@@ -137,13 +230,13 @@ header {
 }
 
 header h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 8vw, 3.5rem);
     margin-bottom: 0.5rem;
     color: var(--accent-gold);
 }
 
 header p {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
     color: var(--text-muted);
 }
 
@@ -154,7 +247,7 @@ header p {
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 32px;
-    padding: 3rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
     box-shadow: var(--shadow-soft);
     transition: var(--transition-smooth);
     animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -401,8 +494,20 @@ header p {
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.8rem;
+    gap: clamp(0.3rem, 2vw, 0.8rem);
     margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+    .calendar-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .calendar-day {
@@ -475,10 +580,36 @@ header p {
 
     .container {
         padding: 1rem;
+        gap: 1.5rem;
     }
 
     .card {
         padding: 1.5rem;
+        border-radius: 24px;
+    }
+
+    header {
+        padding: 2rem 0;
+    }
+
+    #main-countdown {
+        font-size: 3rem !important;
+    }
+
+    .tracker-section h2,
+    .countdown-section h2,
+    .calendar-section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    #main-countdown {
+        font-size: 2.5rem !important;
     }
 }
 
@@ -490,8 +621,8 @@ header p {
 }
 
 .analog-clock {
-    width: 300px;
-    height: 300px;
+    width: clamp(200px, 70vw, 300px);
+    height: clamp(200px, 70vw, 300px);
     border: 12px solid var(--card-bg);
     border-radius: 50%;
     position: relative;
@@ -546,6 +677,42 @@ header p {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-muted);
+}
+
+.alarm-status.active {
+    color: #10b981;
+}
+
+/* Specific component fixes for mobile */
+@media (max-width: 768px) {
+    #tasbeeh-count {
+        font-size: clamp(3.5rem, 15vw, 5rem) !important;
+    }
+
+    #count-btn {
+        padding: 1rem 2rem !important;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .zakat-section div {
+        max-width: 100% !important;
+    }
+
+    .onboarding-card {
+        padding: 2rem 1.5rem;
+        width: 95%;
+    }
+
+    .onboarding-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .search-results-dropdown {
+        max-height: 151px;
+    }
 }
 
 .alarm-status.active {
