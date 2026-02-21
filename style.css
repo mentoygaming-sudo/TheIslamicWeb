@@ -344,8 +344,8 @@ header p {
 }
 
 .tracker-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
 }
 
@@ -427,6 +427,8 @@ header p {
     color: white;
     border: none;
     padding: 1rem 2.5rem;
+    min-width: 120px;
+    min-height: 48px;
     border-radius: 50px;
     font-size: 1.1rem;
     cursor: pointer;
@@ -713,8 +715,53 @@ header p {
     .search-results-dropdown {
         max-height: 151px;
     }
+
+    button,
+    .onboarding-btn,
+    #change-region-btn,
+    .theme-toggle {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
 
-.alarm-status.active {
-    color: #10b981;
+/* Scroll to Top Button Styles */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-gold);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: var(--transition-smooth);
+    opacity: 0;
+}
+
+.scroll-top-btn.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-5px);
+    background: #c5a02c;
+}
+
+@media (max-width: 768px) {
+    .scroll-top-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+    }
 }
