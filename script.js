@@ -180,10 +180,14 @@ function initOnboarding() {
     if (!overlay) return;
 
     const savedName = localStorage.getItem('userName');
+    if (nameInput && savedName) nameInput.value = savedName;
+
     if (savedName && userCity && userCountry) {
         overlay.style.display = 'none';
         personalizeUI(savedName);
         fetchPrayerTimes(userCity, userCountry);
+    } else {
+        overlay.style.display = 'flex';
     }
 
     window.nextOnboardingStep = (step) => {
@@ -213,8 +217,16 @@ function initOnboarding() {
         const name = nameInput.value.trim();
         const city = searchInput.getAttribute('data-city');
         const country = searchInput.getAttribute('data-country');
-        localStorage.setItem('userName', name); localStorage.setItem('userCity', city); localStorage.setItem('userCountry', country);
-        overlay.style.opacity = 0; setTimeout(() => location.reload(), 500);
+
+        if (!name) return alert("Please enter your name.");
+        if (!city || !country) return alert("Please select a city from the list.");
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userCity', city);
+        localStorage.setItem('userCountry', country);
+
+        overlay.style.opacity = 0;
+        setTimeout(() => location.reload(), 500);
     });
 }
 
